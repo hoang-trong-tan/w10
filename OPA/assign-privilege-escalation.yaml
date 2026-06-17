@@ -1,0 +1,23 @@
+apiVersion: mutations.gatekeeper.sh/v1
+kind: Assign 
+metadata:
+  name: default-no-privilege-escalation
+spec:
+  match:
+    namespaceSelector:
+      matchLabels:
+        pod-security/apply: "true"
+  applyTo:
+    - groups:
+        - "" 
+      kinds:
+        - "Pod" 
+      versions:
+        - "v1"
+  location: "spec.containers[name:*].securityContext.allowPrivilegeEscalation"
+  parameters:
+    pathTests:
+      - subPath: "spec.containers[name:*].securityContext.allowPrivilegeEscalation"
+        condition: MustNotExist
+    assign:
+      value: false

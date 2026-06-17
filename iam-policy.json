@@ -1,0 +1,11 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Action": [
+      "secretsmanager:GetSecretValue",
+      "secretsmanager:DescribeSecret"
+    ],
+    "Resource": "arn:aws:secretsmanager:ap-southeast-1:783459135560:secret:my-app/db-credentials-*"
+  }]
+}
